@@ -2,3 +2,4 @@
 *.swo
 .rvmrc
 .env
+node_modules
