@@ -9,7 +9,7 @@ const cockpit = (props) => {
     setTimeout(() => {
       alert('Saved data to cloud!');
     }, 1000);
-  }, [props.persons]);
+  }, [props.personsLength]);
   // With array, use effect can be controlled by persons changes
   // if the array is empty, only function like componentDidMount
 
@@ -21,4 +21,6 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+//React memo, save a snapshot of the component
+//and it is only processed again if any entry changes
+export default React.memo(cockpit);
