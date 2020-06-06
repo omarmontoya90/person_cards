@@ -8,9 +8,9 @@ import Aux       from '../hoc/Aux'
 class App extends Component {
   state = {
     persons: [
-      { id: "oma1", name:"Omar", age:"30"},
-      { id: "leo1", name:"Leonardo", age:"23"},
-      { id: "mon1", name:"Montoya", age:"23"}
+      { id: "oma1", name: "Omar", age: 30},
+      { id: "leo1", name: "Leonardo", age: 23},
+      { id: "mon1", name: "Montoya", age: 23}
     ],
     otherSatet: "some value",
     showPersons: false,

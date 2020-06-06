@@ -1,17 +1,28 @@
-import React     from 'react';
-import classes   from './Person.css';
-import Aux       from '../../../hoc/Aux'
-import withClass from '../../../hoc/withClass'
+import React, { Component } from 'react';
+import PropTypes            from 'prop-types';
 
-const person = (props) => {
-  return (
-    <Aux>
-      <p onClick={props.changeName}> I'm {props.name} and I am {props.age} years old!</p>
-      { (props.click) && <button onClick={props.click}>Delete User</button> }
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name}/>
-    </Aux>
-  )
+import classes              from './Person.css';
+import Aux                  from '../../../hoc/Aux'
+import withClass            from '../../../hoc/withClass'
+
+class Person extends Component {
+  render() {
+    return (
+      <Aux>
+        <p onClick={this.props.changeName}> I'm {this.props.name} and I am {this.props.age} years old!</p>
+        { (this.props.click) && <button onClick={this.props.click}>Delete User</button> }
+        <p>{this.props.children}</p>
+        <input type="text" onChange={this.props.changed} value={this.props.name}/>
+      </Aux>
+    );
+  }
 };
 
-export default withClass(person, classes.Person);
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
+
+export default withClass(Person, classes.Person);
