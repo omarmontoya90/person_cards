@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     // This is similary to componentDidMount and componentDidUpdate
     // Use to HTTP request
 
-    setTimeout(() => {
-      alert('Saved data to cloud!');
-    }, 1000);
+    //setTimeout(() => {
+    //  alert('Saved data to cloud!');
+    //}, 1000);
+    toggleBtnRef.current.click();
   }, [props.personsLength]);
   // With array, use effect can be controlled by persons changes
   // if the array is empty, only function like componentDidMount
@@ -16,7 +19,9 @@ const cockpit = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
-      <button onClick={props.togglePersons}>Toggle Persons</button>
+      <button ref={toggleBtnRef} onClick={props.togglePersons}>
+        Toggle Persons
+      </button>
     </div>
   );
 };
