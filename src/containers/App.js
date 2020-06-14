@@ -3,7 +3,8 @@ import classes   from'./App.css';
 import Persons   from '../components/Persons/Persons';
 import Cockpit   from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
-import Aux       from '../hoc/Aux'
+import Aux       from '../hoc/Aux';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   state = {
@@ -14,7 +15,8 @@ class App extends Component {
     ],
     otherSatet: "some value",
     showPersons: false,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   }
 
   nameChangedHandler = (event, id) => {
@@ -50,6 +52,10 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
+
   render() {
     let persons = null;
     if ( this.state.showPersons ) {
@@ -64,12 +70,17 @@ class App extends Component {
     }
     return (
       <Aux>
-        <Cockpit
-          title={this.props.appTitle}
-          personsLength={this.state.persons.length}
-          togglePersons={this.togglePersonsHandler}
-        />
-        { persons }
+        <AuthContext.Provider value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler}}>
+          <Cockpit
+            title={this.props.appTitle}
+            personsLength={this.state.persons.length}
+            togglePersons={this.togglePersonsHandler}
+            login={this.loginHandler}
+          />
+          { persons }
+        </AuthContext.Provider>
       </Aux>
 
     );

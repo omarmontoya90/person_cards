@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes            from 'prop-types';
 
 import classes              from './Person.css';
-import Aux                  from '../../../hoc/Aux'
-import withClass            from '../../../hoc/withClass'
+import Aux                  from '../../../hoc/Aux';
+import withClass            from '../../../hoc/withClass';
+import AuthContext          from '../../../context/auth-context';
 
 class Person extends Component {
 
@@ -19,6 +20,9 @@ class Person extends Component {
   render() {
     return (
       <Aux>
+        <AuthContext.Consumer>
+          {(context)=> context.authenticated ? <p>Authenticated!!!</p> : <p>Please Login</p>}
+        </AuthContext.Consumer>
         <p onClick={this.props.changeName}> I'm {this.props.name} and I am {this.props.age} years old!</p>
         { (this.props.click) && <button onClick={this.props.click}>Delete User</button> }
         <p>{this.props.children}</p>
